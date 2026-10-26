@@ -4,9 +4,18 @@
 
 This project analyses the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) using MySQL 8.0. Olist is an online marketplace in Brazil that connects small sellers to buyers through the major shopping platforms.
 
-The dataset covers **96,478 delivered orders worth R$15,422,462**, placed between **October 2016 and August 2018**, across six related tables: `orders`, `order_items`, `customers`, `order_payments`, `order_reviews` and `sellers`.
+The dataset covers **96,478 delivered orders worth R$15,422,462**, placed between **October 2016 and August 2018**, in a nine-table relational database. The analysis uses six of those tables: `orders`, `order_items`, `customers`, `order_payments`, `order_reviews` and `sellers`.
 
 The question I set out to answer: **Olist's revenue grew sharply through 2017, then stopped growing in 2018. What caused the growth, why did it stall, and where should the business focus next?**
+
+### Database schema
+
+![Olist database schema](olist_schema_diagram.png)
+
+All nine tables were loaded into MySQL with 6 foreign keys and indexes. Two tables are kept unlinked by design:
+
+- **`geolocation`**: zip code prefixes are not unique on either side, so a foreign key would force a wrong join and duplicate rows.
+- **`product_category_translation`**: some categories have no English translation, so this table is joined with `LEFT JOIN` when needed instead of a foreign key, which keeps the untranslated categories in the results.
 
 ### Data quality notes
 
@@ -100,7 +109,8 @@ The few customers who do come back take about 110.7 days to do it. So we should 
 | `q7_repeat_vs_onetime_buyers.sql` | Repeat vs one-time buyers, plus the split-order check |
 | `q8_top_category_revenue_share.sql` | Top category's share of product revenue |
 | `One_Page_Insight_Summary.pdf` | One-page written summary of findings and recommendations |
-| `/screenshots` | Query results as run in MySQL Workbench |
+| `DASP - B02 - Cristine Angelica Marie Tolentino.pdf` | Screenshots of all 8 query results as run in MySQL Workbench |
+| `olist_schema_diagram.png` | Database schema (EER diagram) |
 
 Every `.sql` file includes comments explaining why the query is written the way it is, not just what it does.
 
