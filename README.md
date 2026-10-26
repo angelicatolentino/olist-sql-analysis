@@ -10,7 +10,7 @@ The question I set out to answer: **Olist's revenue grew sharply through 2017, t
 
 ### Database schema
 
-![Olist database schema](olist_schema_diagram.png)
+![Olist database schema](Star%20Schema%20Diagram.png)
 
 All nine tables were loaded into MySQL with 6 foreign keys and indexes. Two tables are kept unlinked by design:
 
